@@ -1,14 +1,20 @@
 import React from "react";
 import "./Navbar.css";
+
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 const Navbar = ({ options }) => {
 	return (
-		<div className='Navbar'>
-			{options.map((opt) => (
-				<h1 className='nav-opt glow' key={opt}>
-					{opt}
-				</h1>
-			))}
-		</div>
+		<AppBar>
+			<Toolbar variant='string' disableGutters>
+				{options.map((opt) => (
+					<Typography variant='h5' component='div' gutterBottom sx={{ display: "flex", padding: "10px" }}>
+						{opt}
+					</Typography>
+				))}
+			</Toolbar>
+		</AppBar>
 	);
 };
 
