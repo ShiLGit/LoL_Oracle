@@ -1,5 +1,6 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Landing from "./pages/Landing";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 
@@ -18,7 +19,8 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<div className='Layout'>
-				<Navbar options={["Main", "About"]} />
+				<Navbar options={["Main", "About", "Analyse Account"]} />
+				<Landing />
 			</div>
 		</ThemeProvider>
 	);
