@@ -1,8 +1,6 @@
 import { React, useRef } from "react";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -46,32 +44,28 @@ const SummonerForm = () => {
 		return toReturn;
 	};
 	return (
-		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box" }}>
-			<CardContent>
-				<form onSubmit={handleSubmit}>
-					<Grid container direction='row' spacing={10} justifyContent='center'>
-						<Grid item>
-							<Typography variant='h6' sx={team_title}>
-								Team 1
-							</Typography>
-							{generateTextFields("teamOne")}
-						</Grid>
-						<Grid item>
-							<Typography variant='h6' sx={team_title}>
-								Team 2
-							</Typography>
-							{generateTextFields("teamTwo")}
-						</Grid>
-					</Grid>
+		<form onSubmit={handleSubmit}>
+			<Grid container direction='row' spacing={10} justifyContent='center'>
+				<Grid item>
+					<Typography variant='h6' sx={team_title}>
+						Team 1
+					</Typography>
+					{generateTextFields("teamOne")}
+				</Grid>
+				<Grid item>
+					<Typography variant='h6' sx={team_title}>
+						Team 2
+					</Typography>
+					{generateTextFields("teamTwo")}
+				</Grid>
+			</Grid>
 
-					<Grid container>
-						<Button xs={12} sx={{ margin: "auto" }} type='submit'>
-							Predict the Outcome
-						</Button>
-					</Grid>
-				</form>
-			</CardContent>
-		</Card>
+			<Grid container>
+				<Button xs={12} sx={{ margin: "auto" }} type='submit'>
+					Predict the Outcome
+				</Button>
+			</Grid>
+		</form>
 	);
 };
 export default SummonerForm;
