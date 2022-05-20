@@ -1,21 +1,11 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Landing from "./pages/Landing";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { green, purple } from "@mui/material/colors";
-
+import { ThemeProvider } from "@mui/material/styles";
+import { withStyles } from "@mui/styles";
+import theme from "./styling/theme";
+import styles from "./styling/styles";
 function App() {
-	const theme = createTheme({
-		palette: {
-			primary: {
-				main: "#241C55"
-			},
-			secondary: {
-				main: "#060117"
-			}
-		}
-	});
-
 	return (
 		<ThemeProvider theme={theme}>
 			<div className='Layout'>
@@ -26,4 +16,4 @@ function App() {
 	);
 }
 
-export default App;
+export default withStyles(styles)(App);
