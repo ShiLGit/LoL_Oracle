@@ -5,6 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { withStyles } from "@mui/styles";
 import theme from "./styling/theme";
 import styles from "./styling/styles";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:8080";
 function App() {
 	return (
 		<ThemeProvider theme={theme}>

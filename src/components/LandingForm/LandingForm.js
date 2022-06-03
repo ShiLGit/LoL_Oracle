@@ -15,8 +15,8 @@ const LandingForm = () => {
 		}
 	};
 	return (
-		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box", minHeight: "60vh" }}>
-			<CardContent>{computeFormType(formType)}</CardContent>
+		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box" }}>
+			<CardContent sx={{ height: "60vh" }}>{computeFormType(formType)}</CardContent>
 		</Card>
 	);
 };

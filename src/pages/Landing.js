@@ -1,6 +1,6 @@
 import { React } from "react";
 import Grid from "@mui/material/Grid";
-import SummonerForm from "../components/LandingForm/LandingForm";
+import LandingForm from "../components/LandingForm/LandingForm";
 import TextCard from "./TextCard";
 import Box from "@mui/material/Box";
 
@@ -12,7 +12,7 @@ const Landing = () => {
 					<TextCard />
 				</Grid>
 				<Grid item lg={7} md={7} sm={12} xs={12} alignItems='top'>
-					<SummonerForm />
+					<LandingForm />
 				</Grid>
 			</Grid>
 		</Box>

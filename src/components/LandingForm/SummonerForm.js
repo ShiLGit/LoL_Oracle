@@ -11,8 +11,7 @@ const SummonerForm = () => {
 	});
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		alert("hi idiot");
-		axios.post("http://localhost:8080/welcome").then((resp) => {
+		axios.post("/welcome").then((resp) => {
 			console.log(resp);
 		});
 	};
