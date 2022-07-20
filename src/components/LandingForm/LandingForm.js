@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { SUMMONER_FORM, APIKEY_FORM } from "../../common/constants";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import ApiKeyForm from "./ApiKeyForm";
 import SummonerForm from "./SummonerForm";
+import ApiKeyContext from "../../common/ApiKeyContext";
 const LandingForm = () => {
-	const [formType, setFormType] = useState(APIKEY_FORM);
+	const apiKeyContext = useContext(ApiKeyContext);
+	const [formType, setFormType] = useState(apiKeyContext.apiKey ? SUMMONER_FORM : APIKEY_FORM);
 	const computeFormType = () => {
 		switch (formType) {
 			case SUMMONER_FORM:

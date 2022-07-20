@@ -1,9 +1,7 @@
 import { createContext } from "react";
 const apiKeyContext = createContext({
 	apiKey: "",
-	setKey: () => {},
-	timeout: null,
-	setTimeout: () => {}
+	setKey: () => {}
 });
 
 export default apiKeyContext;

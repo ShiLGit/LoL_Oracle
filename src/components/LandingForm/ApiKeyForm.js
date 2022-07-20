@@ -7,12 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import ApiKeyContext from "../../common/ApiKeyContext";
 import { SUMMONER_FORM } from "../../common/constants";
-import { alignProperty } from "@mui/material/styles/cssUtils";
 const ApiKeyForm = ({ setFormType }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const apiKeyContext = useContext(ApiKeyContext);
 	const [inputApiKey, setInputApiKey] = useState("");
-	const [apiKeyTimeout, setApiKeyTimeout] = useState(null);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(inputApiKey);
@@ -20,10 +18,10 @@ const ApiKeyForm = ({ setFormType }) => {
 		axios
 			.post("http://localhost:8080/validate-key", inputApiKey)
 			.then((res) => {
-				console.log("from validate-key:", res);
+				console.log("from validate-key:", res, res.data.error === true);
 				setIsLoading(false);
 
-				if (Boolean(res.data.error) === true) {
+				if (res.data.error == true) {
 					alert(res.data.message);
 					setInputApiKey("");
 				} else {
@@ -32,6 +30,10 @@ const ApiKeyForm = ({ setFormType }) => {
 					apiKeyContext.setKey(inputApiKey);
 					setFormType(SUMMONER_FORM);
 					console.log(apiKeyContext);
+					setTimeout(() => {
+						console.log("API KEY EXPIRED!!");
+						apiKeyContext.setKey(null);
+					}, 3600 * 24);
 				}
 			})
 			.catch((err) => {
