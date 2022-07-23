@@ -7,11 +7,9 @@ const TextCard = () => {
 	return (
 		<Box>
 			<Typography sx={lol}>
-				<h2>
-					{
-						"LoL Oracle is a project that aims to predict the winning team of a match during champ select/load screen. Enter summoner names on the right >:("
-					}
-				</h2>
+				{
+					"LoL Oracle is a project that aims to predict the winning team of a match during champ select/load screen. Enter summoner names on the right >:("
+				}
 			</Typography>
 		</Box>
 	);
