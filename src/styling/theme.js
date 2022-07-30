@@ -6,7 +6,13 @@ const theme = createTheme({
 		},
 		secondary: {
 			main: "#060117"
+		},
+		background: {
+			default: "#060117"
 		}
+	},
+	typography: {
+		fontFamily: ["Work Sans"].join(",")
 	}
 });
 

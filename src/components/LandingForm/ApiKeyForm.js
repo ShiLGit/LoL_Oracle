@@ -3,11 +3,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
 import ApiKeyContext from "../../common/ApiKeyContext";
 import { SUMMONER_FORM } from "../../common/constants";
-const ApiKeyForm = ({ setFormType }) => {
+const ApiKeyForm = ({ setFormType, formHeader }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const apiKeyContext = useContext(ApiKeyContext);
 	const [inputApiKey, setInputApiKey] = useState("");
@@ -50,41 +50,51 @@ const ApiKeyForm = ({ setFormType }) => {
 	const getFormBody = () => {
 		if (isLoading) {
 			return (
-				<Grid container direction='column' spacing={10} justifyContent='center'>
+				<Grid container direction='column' spacing={12} justifyContent='center'>
 					<Grid item>
-						<Typography>Validating API key...</Typography>
+						<Typography variant='h3' textAlign={"center"} sx={{ marginTop: "100px" }}>
+							Validating API key...
+						</Typography>
 					</Grid>
 					<Grid item>
-						<CircularProgress sx={{ height: "2000vh" }} />
+						<LinearProgress sx={{ maxWidth: "80%", margin: "auto", textAlign: "center" }} />
 					</Grid>
 				</Grid>
 			);
 		} else {
 			return (
-				<form style={{ margin: "auto", height: "100%" }} onSubmit={handleSubmit}>
-					<Grid container direction='row' spacing={5} justifyContent='center'>
+				<form style={{ margin: "auto", boxSizing: "none" }} onSubmit={handleSubmit}>
+					<Grid container direction='col' spacing={5} justifyContent='center'>
 						<Grid item>
-							<Typography variant='h6'>
-								Riot has not approved my API key application so you'll need to generate one :D!
-							</Typography>
-							<Typography>
-								Go to{" "}
-								<a href='https://developer.riotgames.com/' target='_blank'>
-									Riot's devsite
-								</a>
-								, log in, and generate + paste an api key in this form:
-							</Typography>
-							<img src={require("../../images/dammit.gif")} style={{ maxHeight: "320px" }}></img>
+							<Grid container justifyContent='center'>
+								<Grid item>
+									<Typography variant='h3' classes={formHeader} align='center'>
+										Step 1: Generate an API key
+									</Typography>
+									<Typography align='center'>
+										Riot hasn't approved my API key application, so you'll have to generate one
+										yourself. Go to{" "}
+										<a href='https://developer.riotgames.com/' target='_blank'>
+											Riot's devsite
+										</a>
+										, log in, generate a key and copy paste it in this form:
+									</Typography>
+								</Grid>
+								<img src={require("../../images/dammit.gif")} style={{ maxHeight: "350px" }}></img>
+							</Grid>
 						</Grid>
 						<Grid item></Grid>
+						<Grid item id='wtf'>
+							<TextField
+								variant='standard'
+								sx={{ minWidth: "45ch", height: "0.5em", boxSizing: "none !important" }}
+								inputProps={{ form: { autocomplete: "off" } }}
+								onChange={handleOnChange}
+								value={inputApiKey}
+							></TextField>
+							<Button type='submit'>Submit</Button>
+						</Grid>
 					</Grid>
-					<TextField
-						sx={{ minWidth: "350px" }}
-						inputProps={{ form: { autocomplete: "off" } }}
-						onChange={handleOnChange}
-						value={inputApiKey}
-					></TextField>
-					<Button type='submit'>Submit</Button>
 				</form>
 			);
 		}
