@@ -7,7 +7,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
 import ApiKeyContext from "../../common/ApiKeyContext";
 import { SUMMONER_FORM } from "../../common/constants";
-const ApiKeyForm = ({ setFormType, formHeader }) => {
+const ApiKeyForm = ({ setFormType }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const apiKeyContext = useContext(ApiKeyContext);
 	const [inputApiKey, setInputApiKey] = useState("");
@@ -68,7 +68,7 @@ const ApiKeyForm = ({ setFormType, formHeader }) => {
 						<Grid item>
 							<Grid container justifyContent='center'>
 								<Grid item>
-									<Typography variant='h3' classes={formHeader} align='center'>
+									<Typography variant='h3' align='center'>
 										Step 1: Generate an API key
 									</Typography>
 									<Typography align='center'>

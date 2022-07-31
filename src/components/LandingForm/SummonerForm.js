@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import apiKeyContext from "../../common/ApiKeyContext";
-
+import Switch from "@mui/material/Switch";
 const SummonerForm = () => {
 	const MANUAL_DATA = "MANUAL";
 	const SUMMONER_NAME_DATA = "SUMMONER_NAME";
@@ -37,10 +37,11 @@ const SummonerForm = () => {
 		}
 	};
 	const summoner_textfield = {
-		display: "block",
+		display: "flex",
 		marginBottom: "10px",
 		borderRadius: "0px",
-		padding: "5px"
+		padding: "5px",
+		fontSize: "0.5em"
 	};
 	const handleFormChange = (e) => {
 		if (formData.current.teamOne) delete formData.current.teamOne;
@@ -69,6 +70,7 @@ const SummonerForm = () => {
 					onChange={(e) => handleManualFormChange(e, teamName, i)}
 					key={teamName + "_" + i}
 					inputProps={{ form: { autocomplete: "off" } }}
+					variant='standard'
 				/>
 			);
 		}
@@ -76,47 +78,76 @@ const SummonerForm = () => {
 	};
 	const getManualEntryForm = () => {
 		return (
-			<>
+			<Grid container direction='column'>
 				<Grid item>
-					<Typography variant='h6' sx={team_title}>
-						Team 1
-					</Typography>
-					{generateTextFields("teamOne")}
+					<Grid container sx={10} spacing={4} justifyContent='center'>
+						<Grid item xs={4} justifyContent='center'>
+							<Typography variant='h6' sx={team_title}>
+								Team 1
+							</Typography>
+							{generateTextFields("teamOne")}
+						</Grid>
+						<Grid item xs={4}>
+							<Typography variant='h6' sx={team_title}>
+								Team 2
+							</Typography>
+							{generateTextFields("teamTwo")}
+						</Grid>
+					</Grid>
 				</Grid>
-				<Grid item>
-					<Typography variant='h6' sx={team_title}>
-						Team 2
-					</Typography>
-					{generateTextFields("teamTwo")}
+				<Grid item justifyContent='center'>
+					<Button type='submit' sx={{ display: "flex", margin: "auto" }}>
+						Predict the Outcome
+					</Button>
 				</Grid>
-			</>
+			</Grid>
 		);
 	};
 	const getDefaultForm = () => {
 		return (
-			<Grid item>
-				<Typography variant='h5'>Enter a summoner in an active ranked game:</Typography>
-				<TextField
-					required
-					label='Summoner Name'
-					sx={{ display: "flex", minWidth: "300px", maxWidth: "80%", margin: "auto" }}
-					onChange={handleFormChange}
-				></TextField>
+			<Grid item sx={{ marginTop: "60px" }}>
+				<Typography variant='h5' align='center'>
+					Enter a summoner in an active Summoner's Rift game:
+				</Typography>
+				<Grid container justifyContent='center' sx={{ marginTop: "40px" }}>
+					<Grid item xs={8}>
+						<TextField
+							required
+							label='Summoner Name'
+							variant='standard'
+							sx={{ display: "flex" }}
+							onChange={handleFormChange}
+							inputProps={{ form: { autocomplete: "off" } }}
+						></TextField>
+					</Grid>
+					<Grid xs={3}>
+						<Button type='submit'>Predict the Outcome</Button>
+					</Grid>
+				</Grid>
 			</Grid>
 		);
 	};
+	// {isManual ? getManualEntryForm() : getDefaultForm()}
+	// <Button xs={12} sx={{ margin: "auto" }} type='submit'>
+	// 	Predict the Outcome
+	// </Button>{" "}
 	return (
 		<form onSubmit={handleSubmit}>
-			<Grid container direction='row' spacing={10} justifyContent='center'>
-				{isManual ? getManualEntryForm() : getDefaultForm()}
-			</Grid>
-			<Grid container direction='column'>
-				<Button xs={12} sx={{ margin: "auto" }} type='submit'>
-					Predict the Outcome
-				</Button>
-				<Button onClick={toggleIsManual}>
-					{isManual ? "Toggle Summoner Entry Mode (Active Games Only)" : "Toggle Manual Team Entry"}
-				</Button>
+			<Typography variant='h4' align='center' height='70px'>
+				Step 2: Enter Game Lookup Info
+			</Typography>
+			<Grid container justifyContent='center' direction='column' height='530px' width='100%' id='ffs'>
+				<Grid item xs={10}>
+					{isManual ? getManualEntryForm() : getDefaultForm()}
+				</Grid>
+				<Grid item xs={2}>
+					<Grid container justifyContent='center'>
+						<Typography align='center'>Toggle Manual Entry Mode</Typography>
+						<Switch onClick={toggleIsManual} checked={isManual}>
+							{isManual ? "Toggle Summoner Entry Mode (Active Games Only)" : "Toggle Manual Team Entry"}
+						</Switch>
+					</Grid>
+				</Grid>
 			</Grid>
 		</form>
 	);
