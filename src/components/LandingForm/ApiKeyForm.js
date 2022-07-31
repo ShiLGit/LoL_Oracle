@@ -18,10 +18,10 @@ const ApiKeyForm = ({ setFormType, formHeader }) => {
 		axios
 			.post("http://localhost:8080/validate-key", inputApiKey)
 			.then((res) => {
-				console.log("from validate-key:", res, res.data.error === true);
+				console.log("from validate-key:", res.data, res.data.error === "true");
 				setIsLoading(false);
 
-				if (res.data.error == true) {
+				if (res.data.error === "true") {
 					alert(res.data.message);
 					setInputApiKey("");
 				} else {
@@ -84,7 +84,7 @@ const ApiKeyForm = ({ setFormType, formHeader }) => {
 							</Grid>
 						</Grid>
 						<Grid item></Grid>
-						<Grid item id='wtf'>
+						<Grid item>
 							<TextField
 								variant='standard'
 								sx={{ minWidth: "45ch", height: "0.5em", boxSizing: "none !important" }}
