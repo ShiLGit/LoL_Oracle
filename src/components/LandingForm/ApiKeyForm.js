@@ -1,47 +1,37 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
-import ApiKeyContext from "../../common/ApiKeyContext";
-import { SUMMONER_FORM } from "../../common/constants";
+import Cookies from "js-cookie";
+import ValidateKeyLoadMsg from "./ValidateKeyLoadMsg";
+import { SUMMONER_FORM, APIKEY } from "../../common/constants";
+import RequestLogic from "../../common/RequestLogic";
 const ApiKeyForm = ({ setFormType }) => {
 	const [isLoading, setIsLoading] = useState(false);
-	const apiKeyContext = useContext(ApiKeyContext);
 	const [inputApiKey, setInputApiKey] = useState("");
+	const validKeySuccessCallback = (resData) => {
+		console.log("from validate-key:", resData, resData.error === "true");
+		setIsLoading(false);
+		if (resData.error === "true") {
+			alert(resData.message);
+			setInputApiKey("");
+		} else {
+			Cookies.set(APIKEY, inputApiKey, { expires: 1 });
+			setFormType(SUMMONER_FORM);
+		}
+	};
+	const validateKeyFailCallback = (err) => {
+		setIsLoading(false);
+		alert(err);
+		console.log("MISC ERROR", err);
+	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(inputApiKey);
 		setIsLoading(true);
-		axios
-			.post("http://localhost:8080/validate-key", inputApiKey)
-			.then((res) => {
-				console.log("from validate-key:", res.data, res.data.error === "true");
-				setIsLoading(false);
-
-				if (res.data.error === "true") {
-					alert(res.data.message);
-					setInputApiKey("");
-				} else {
-					//set api key in reducer
-					//navigate to summoner form
-					apiKeyContext.setKey(inputApiKey);
-					setFormType(SUMMONER_FORM);
-					console.log(apiKeyContext);
-					setTimeout(() => {
-						console.log("API KEY EXPIRED!!");
-						apiKeyContext.setKey(null);
-					}, 3600 * 24);
-				}
-			})
-			.catch((err) => {
-				setIsLoading(false);
-
-				alert(err);
-				console.log("MISC ERROR", err);
-			});
+		RequestLogic.validateApiKey(inputApiKey, validKeySuccessCallback, validateKeyFailCallback);
 	};
 	const handleOnChange = (e) => {
 		setInputApiKey(e.target.value.replace(" ", ""));
@@ -49,18 +39,7 @@ const ApiKeyForm = ({ setFormType }) => {
 
 	const getFormBody = () => {
 		if (isLoading) {
-			return (
-				<Grid container direction='column' spacing={12} justifyContent='center'>
-					<Grid item>
-						<Typography variant='h3' textAlign={"center"} sx={{ marginTop: "100px" }}>
-							Validating API key...
-						</Typography>
-					</Grid>
-					<Grid item>
-						<LinearProgress sx={{ maxWidth: "80%", margin: "auto", textAlign: "center" }} />
-					</Grid>
-				</Grid>
-			);
+			return <ValidateKeyLoadMsg msg={"Validating API key..."} />;
 		} else {
 			return (
 				<form style={{ margin: "auto", boxSizing: "none" }} onSubmit={handleSubmit}>
@@ -68,7 +47,7 @@ const ApiKeyForm = ({ setFormType }) => {
 						<Grid item>
 							<Grid container justifyContent='center'>
 								<Grid item>
-									<Typography variant='h3' align='center'>
+									<Typography variant='h3' align='center' className='formTitle'>
 										Step 1: Generate an API key
 									</Typography>
 									<Typography align='center'>
@@ -80,7 +59,11 @@ const ApiKeyForm = ({ setFormType }) => {
 										, log in, generate a key and copy paste it in this form:
 									</Typography>
 								</Grid>
-								<img src={require("../../images/dammit.gif")} style={{ maxHeight: "350px" }}></img>
+								<img src={require("../../images/dammit.gif")} style={{ maxHeight: "375px" }}></img>
+								<Typography align='center' sx={{ marginTop: "5px", fontSize: "0.8em" }}>
+									(Note that these keys will only last 24h, so you'll need to generate a new key after
+									it expires)
+								</Typography>
 							</Grid>
 						</Grid>
 						<Grid item></Grid>

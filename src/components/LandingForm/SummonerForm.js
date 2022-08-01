@@ -120,23 +120,20 @@ const SummonerForm = () => {
 							inputProps={{ form: { autocomplete: "off" } }}
 						></TextField>
 					</Grid>
-					<Grid xs={3}>
+					<Grid item xs={3}>
 						<Button type='submit'>Predict the Outcome</Button>
 					</Grid>
 				</Grid>
 			</Grid>
 		);
 	};
-	// {isManual ? getManualEntryForm() : getDefaultForm()}
-	// <Button xs={12} sx={{ margin: "auto" }} type='submit'>
-	// 	Predict the Outcome
-	// </Button>{" "}
+
 	return (
 		<form onSubmit={handleSubmit}>
-			<Typography variant='h4' align='center' height='70px'>
+			<Typography variant='h4' align='center' height='100px'>
 				Step 2: Enter Game Lookup Info
 			</Typography>
-			<Grid container justifyContent='center' direction='column' height='530px' width='100%' id='ffs'>
+			<Grid container justifyContent='center' direction='column' height='580px' width='100%' id='ffs'>
 				<Grid item xs={10}>
 					{isManual ? getManualEntryForm() : getDefaultForm()}
 				</Grid>
