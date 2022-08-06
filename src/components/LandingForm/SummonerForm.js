@@ -4,21 +4,21 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import apiKeyContext from "../../common/ApiKeyContext";
 import Switch from "@mui/material/Switch";
+import Cookies from "js-cookie";
+import { APIKEY } from "../../common/constants";
+import RequestLogic from "../../common/RequestLogic";
 const SummonerForm = () => {
-	const MANUAL_DATA = "MANUAL";
-	const SUMMONER_NAME_DATA = "SUMMONER_NAME";
-	const { apiKey } = useContext(apiKeyContext);
+	const apiKey = Cookies.get(APIKEY);
 	const [isManual, setIsManual] = useState(false);
 	const formData = useRef({
-		apiKey,
-		dataFormat: SUMMONER_NAME_DATA
+		apiKey
 	});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formDataObj = formData.current;
+		console.log("Submitting formdata: ", formDataObj);
 		if (isManual) {
 			if (
 				!formDataObj.teamOne ||
@@ -33,7 +33,11 @@ const SummonerForm = () => {
 				console.log(resp);
 			});
 		} else {
-			console.log("TODO!!!");
+			RequestLogic.makePrediction(
+				formDataObj,
+				() => {},
+				() => {}
+			);
 		}
 	};
 	const summoner_textfield = {

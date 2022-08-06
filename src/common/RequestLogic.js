@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 const validateApiKey = (apiKey, successCallback, failureCallback) => {
 	axios
 		.post("http://localhost:8080/validate-key", apiKey)
@@ -10,5 +10,14 @@ const validateApiKey = (apiKey, successCallback, failureCallback) => {
 			failureCallback(err);
 		});
 };
-
-export default { validateApiKey };
+const makePrediction = (requestData, successCallback, failureCallback) => {
+	axios
+		.post("http://localhost:8080/make-prediction", requestData)
+		.then((res) => {
+			console.log(res);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+export default { validateApiKey, makePrediction };
