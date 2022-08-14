@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import Switch from "@mui/material/Switch";
 import Cookies from "js-cookie";
 import { APIKEY } from "../../common/constants";
@@ -29,16 +28,9 @@ const SummonerForm = () => {
 				alert(">= 1 of the fields arent filled in >:(");
 				return;
 			}
-			axios.post("/submit-teams").then((resp) => {
-				console.log(resp);
-			});
-		} else {
-			RequestLogic.makePrediction(
-				formDataObj,
-				() => {},
-				() => {}
-			);
 		}
+
+		RequestLogic.makePrediction(formDataObj, () => {});
 	};
 	const summoner_textfield = {
 		display: "flex",
