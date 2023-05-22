@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import Cookies from "js-cookie";
-import ValidateKeyLoadMsg from "./ValidateKeyLoadMsg";
+import LoadMsg from "./LoadMsg";
 import { SUMMONER_FORM, APIKEY } from "../../common/constants";
 import RequestLogic from "../../common/RequestLogic";
 const ApiKeyForm = ({ setFormType }) => {
@@ -39,7 +39,7 @@ const ApiKeyForm = ({ setFormType }) => {
 
 	const getFormBody = () => {
 		if (isLoading) {
-			return <ValidateKeyLoadMsg msg={"Validating API key..."} />;
+			return <LoadMsg msg={"Validating API key..."} />;
 		} else {
 			return (
 				<form style={{ margin: "auto", boxSizing: "none" }} onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 const defaultFailCb = (err) => {
 	alert(err.response.data);
+	console.log(err.response.data);
 };
 const validateApiKey = (apiKey, successCallback, failureCallback = defaultFailCb) => {
 	axios

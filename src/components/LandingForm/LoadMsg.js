@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-const ValidateKeyLoadMsg = ({ msg }) => {
+const LoadMsg = ({ msg }) => {
 	return (
 		<Grid container direction='column' spacing={12} justifyContent='center'>
 			<Grid item>
@@ -16,4 +16,4 @@ const ValidateKeyLoadMsg = ({ msg }) => {
 	);
 };
 
-export default ValidateKeyLoadMsg;
+export default LoadMsg;

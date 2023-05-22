@@ -7,13 +7,23 @@ import Switch from "@mui/material/Switch";
 import Cookies from "js-cookie";
 import { APIKEY } from "../../common/constants";
 import RequestLogic from "../../common/RequestLogic";
+import LoadMsg from "./LoadMsg";
 const SummonerForm = () => {
 	const apiKey = Cookies.get(APIKEY);
 	const [isManual, setIsManual] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const formData = useRef({
 		apiKey
 	});
 
+	const makePredictionFailCb = (err) => {
+		setIsLoading(false);
+		alert(err.response.data);
+	};
+	const makePredictionSuccessCb = () => {
+		setIsLoading(false);
+		alert("dummy success fx");
+	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formDataObj = formData.current;
@@ -29,8 +39,8 @@ const SummonerForm = () => {
 				return;
 			}
 		}
-
-		RequestLogic.makePrediction(formDataObj, () => {});
+		setIsLoading(true);
+		RequestLogic.makePrediction(formDataObj, makePredictionSuccessCb, makePredictionFailCb);
 	};
 	const summoner_textfield = {
 		display: "flex",
@@ -72,6 +82,7 @@ const SummonerForm = () => {
 		}
 		return toReturn;
 	};
+
 	const getManualEntryForm = () => {
 		return (
 			<Grid container direction='column'>
@@ -123,26 +134,34 @@ const SummonerForm = () => {
 			</Grid>
 		);
 	};
-
-	return (
-		<form onSubmit={handleSubmit}>
-			<Typography variant='h4' align='center' height='100px'>
-				Step 2: Enter Game Lookup Info
-			</Typography>
-			<Grid container justifyContent='center' direction='column' height='580px' width='100%' id='ffs'>
-				<Grid item xs={10}>
-					{isManual ? getManualEntryForm() : getDefaultForm()}
-				</Grid>
-				<Grid item xs={2}>
-					<Grid container justifyContent='center'>
-						<Typography align='center'>Toggle Manual Entry Mode</Typography>
-						<Switch onClick={toggleIsManual} checked={isManual}>
-							{isManual ? "Toggle Summoner Entry Mode (Active Games Only)" : "Toggle Manual Team Entry"}
-						</Switch>
+	const getFormBody = () => {
+		if (isLoading) {
+			return <LoadMsg msg={"Computing..."}></LoadMsg>;
+		} else {
+			return (
+				<form onSubmit={handleSubmit}>
+					<Typography variant='h4' align='center' height='100px'>
+						Step 2: Enter Game Lookup Info
+					</Typography>
+					<Grid container justifyContent='center' direction='column' height='580px' width='100%' id='ffs'>
+						<Grid item xs={10}>
+							{isManual ? getManualEntryForm() : getDefaultForm()}
+						</Grid>
+						<Grid item xs={2}>
+							<Grid container justifyContent='center'>
+								<Typography align='center'>Toggle Manual Entry Mode</Typography>
+								<Switch onClick={toggleIsManual} checked={isManual}>
+									{isManual
+										? "Toggle Summoner Entry Mode (Active Games Only)"
+										: "Toggle Manual Team Entry"}
+								</Switch>
+							</Grid>
+						</Grid>
 					</Grid>
-				</Grid>
-			</Grid>
-		</form>
-	);
+				</form>
+			);
+		}
+	};
+	return getFormBody();
 };
 export default SummonerForm;

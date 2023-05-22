@@ -6,11 +6,12 @@ import ApiKeyForm from "./ApiKeyForm";
 import SummonerForm from "./SummonerForm";
 import Cookies from "js-cookie";
 import RequestLogic from "../../common/RequestLogic";
-import ValidateKeyLoadMsg from "./ValidateKeyLoadMsg";
+import LoadMsg from "./LoadMsg";
 
 const LandingForm = () => {
 	const [validatingKey, setValidatingKey] = useState(false);
 
+	//check cookies for a valid key on initial load of site
 	useEffect(() => {
 		console.log(Cookies.get(APIKEY));
 		if (Cookies.get(APIKEY)) {
@@ -48,11 +49,7 @@ const LandingForm = () => {
 	return (
 		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box" }}>
 			<CardContent sx={{ height: "700px", paddingTop: "30px" }}>
-				{validatingKey ? (
-					<ValidateKeyLoadMsg msg={"API key detected. Validating..."} />
-				) : (
-					computeFormType(formType)
-				)}
+				{validatingKey ? <LoadMsg msg={"API key detected. Validating..."} /> : computeFormType(formType)}
 			</CardContent>
 		</Card>
 	);
