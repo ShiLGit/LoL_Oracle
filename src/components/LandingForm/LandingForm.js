@@ -10,6 +10,7 @@ import LoadMsg from "./LoadMsg";
 
 const LandingForm = () => {
 	const [validatingKey, setValidatingKey] = useState(false);
+	const [formType, setFormType] = useState();
 
 	//check cookies for a valid key on initial load of site
 	useEffect(() => {
@@ -35,8 +36,8 @@ const LandingForm = () => {
 		console.log(err);
 		setValidatingKey(false);
 		alert("Unexpected error occurred: " + err);
+		setFormType(APIKEY_FORM);
 	};
-	const [formType, setFormType] = useState();
 
 	const computeFormType = () => {
 		switch (formType) {

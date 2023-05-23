@@ -5,10 +5,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Cookies from "js-cookie";
-import { APIKEY } from "../../common/constants";
+import { APIKEY, ERROR_CONSTS, APIKEY_FORM } from "../../common/constants";
 import RequestLogic from "../../common/RequestLogic";
 import LoadMsg from "./LoadMsg";
-const SummonerForm = () => {
+const SummonerForm = ({ setFormType }) => {
 	const apiKey = Cookies.get(APIKEY);
 	const [isManual, setIsManual] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,16 @@ const SummonerForm = () => {
 
 	const makePredictionFailCb = (err) => {
 		setIsLoading(false);
-		alert(err.response.data);
+		let res = err.response;
+		// did the api key expire mid-session? go back to api key form
+		if (res.headers && res.headers["errorcause"] && res.headers["errorcause"] === ERROR_CONSTS.APIKEY) {
+			alert("ERROR: API Key has expired!");
+			setFormType(APIKEY_FORM);
+		} else {
+			// default errhandling
+			alert(res.data);
+			alert(JSON.stringify(res.headers));
+		}
 	};
 	const makePredictionSuccessCb = () => {
 		setIsLoading(false);
@@ -53,13 +62,11 @@ const SummonerForm = () => {
 		if (formData.current.teamOne) delete formData.current.teamOne;
 		if (formData.current.teamTwo) delete formData.current.teamTwo;
 		formData.current.summonerName = e.target.value;
-		console.log(formData.current);
 	};
 	const handleManualFormChange = (e, teamName, idx) => {
 		if (!formData.current[teamName]) formData.current[teamName] = [];
 		if (formData.current.summonerName) delete formData.current.summonerName;
 		formData.current[teamName][idx] = e.target.value;
-		console.log(formData.current);
 	};
 	const toggleIsManual = () => {
 		setIsManual((prev) => !prev);
