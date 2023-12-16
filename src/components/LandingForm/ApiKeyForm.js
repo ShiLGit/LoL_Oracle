@@ -61,8 +61,8 @@ const ApiKeyForm = ({ setFormType }) => {
 								</Grid>
 								<img src={require("../../images/dammit.gif")} style={{ maxHeight: "375px" }}></img>
 								<Typography align='center' sx={{ marginTop: "5px", fontSize: "0.8em" }}>
-									(Note that these keys will only last 24h, so you'll need to generate a new key after
-									it expires)
+									Note that these keys will only last 24h, so you'll need to generate a new key after
+									it expires (or if you clear your cukie!!)
 								</Typography>
 							</Grid>
 						</Grid>

@@ -44,13 +44,15 @@ const Navbar = ({ options }) => {
 							color='inherit'
 						></IconButton>
 					</Box>
+					<img src={require("../../images/logo.png")} style={{ maxHeight: "90px", margin: "5px 20px" }}></img>
+
 					<Typography
-						variant='h6'
+						variant='h3'
 						noWrap
 						component='div'
 						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 					>
-						LOGO
+						LoL Oracle
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{options.map((page) => (
