@@ -7,14 +7,14 @@ import Box from "@mui/material/Box";
 const Landing = () => {
 	return (
 		<Box>
-			<Grid container direction='row' spacing={2}>
-				<Grid item lg={4} md={3} sm={12} xs={12}>
-					<TextCard />
+				<Grid container direction='row' spacing={2}>
+					<Grid item lg={4} md={3} sm={12} xs={12}>
+						<TextCard />
+					</Grid>
+					<Grid item lg={8} md={9} sm={12} xs={12} alignItems='top'>
+						<LandingForm />
+					</Grid>
 				</Grid>
-				<Grid item lg={8} md={9} sm={12} xs={12} alignItems='top'>
-					<LandingForm />
-				</Grid>
-			</Grid>
 		</Box>
 	);
 };

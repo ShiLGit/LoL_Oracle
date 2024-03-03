@@ -6,8 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+const defaultBtnStyle = {color: "white", display: "block", margin: "20px", fontFamily: "Josefin Sans Regular"}
+const selectedBtnStyle = {color: "red", display: "block", margin: "200px", fontFamily:"Josefin Sans Bold"}
 
-const Navbar = ({ options }) => {
+const Navbar = ({ options, currentOption }) => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -27,24 +29,11 @@ const Navbar = ({ options }) => {
 	};
 
 	return (
-		<AppBar position='static' sx={{ height: "fit-content" }}>
+		<AppBar position='fixed' sx={{ height: "fit-content" }}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
-					<Typography variant='h6' noWrap component='div' sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-						LoL Oracle
-					</Typography>
-
-					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size='large'
-							aria-label='account of current user'
-							aria-controls='menu-appbar'
-							aria-haspopup='true'
-							onClick={handleOpenNavMenu}
-							color='inherit'
-						></IconButton>
-					</Box>
-					<img src={require("../../images/logo.png")} style={{ maxHeight: "90px", margin: "5px 20px" }}></img>
+			
+					<img src={require("../../images/logo.png")} style={{ maxHeight: "50px", margin: "5px 20px" }}></img>
 
 					<Typography
 						variant='h3'
@@ -59,7 +48,7 @@ const Navbar = ({ options }) => {
 							<Button
 								key={page}
 								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "white", display: "block" }}
+								sx={currentOption == page ? selectedBtnStyle : defaultBtnStyle}
 							>
 								{page}
 							</Button>

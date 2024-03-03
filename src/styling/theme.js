@@ -2,17 +2,17 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#241C55"
+			main: "#3D1E5C"
 		},
 		secondary: {
-			main: "#060117"
+			main: "#B4A2E9"
 		},
 		background: {
-			default: "#060117"
+			default: "#B4A2E9"
 		}
 	},
 	typography: {
-		fontFamily: ["Work Sans"].join(",")
+		fontFamily: ["Josefin Sans Regular", "Josefin Sans Bold", "Cinzel Decorative"].join(",")
 	}
 });
 

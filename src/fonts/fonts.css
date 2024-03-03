@@ -2,3 +2,11 @@
 	font-family: "Cinzel Decorative";
 	src: url("./CinzelDecorative-Regular.ttf");
 }
+@font-face{
+	font-family: "Josefin Sans Regular";
+	src: url("./JosefinSans-Regular.ttf")
+}
+@font-face{
+	font-family: "Josefin Sans Bold";
+	src: url("./JosefinSans-Bold.ttf")
+}

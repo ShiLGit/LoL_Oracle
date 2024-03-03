@@ -7,6 +7,8 @@ import theme from "./styling/theme";
 import axios from "axios";
 import apiKeyContext from "./common/ApiKeyContext";
 import { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Cookies from "js-cookie";
 axios.defaults.baseURL = "http://localhost:8080";
 function App() {
@@ -15,14 +17,23 @@ function App() {
 		apiKey,
 		setKey: setApiKey
 	};
+	const gridContainer = {
+		display: "grid",
+		gridTemplateRows: "10vh 85vh"
+	}
+	const landing = {display: "grid"}
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline></CssBaseline>
 			<apiKeyContext.Provider value={apiKeyContextValue}>
-				<div className='Layout'>
-					<Navbar options={["Main", "About", "Analyse Account"]} />
-					<Landing />
-				</div>
+				<Box container direction="column" sx = {gridContainer}>
+					<Grid item xs={landing}>
+						<Navbar options={["LoL ORACLE", "ANALYTICS", "GET DATASET"]} current="LoL ORACLE"/>
+					</Grid>	
+					<Grid item xs = {landing}>
+						<Landing />
+					</Grid>
+				</Box>
 			</apiKeyContext.Provider>
 		</ThemeProvider>
 	);
