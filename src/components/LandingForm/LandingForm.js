@@ -7,6 +7,8 @@ import SummonerForm from "./SummonerForm";
 import Cookies from "js-cookie";
 import RequestLogic from "../../common/RequestLogic";
 import LoadMsg from "./LoadMsg";
+import { shadows } from '@mui/system';
+
 
 const LandingForm = () => {
 	const [validatingKey, setValidatingKey] = useState(false);
@@ -48,8 +50,8 @@ const LandingForm = () => {
 		}
 	};
 	return (
-		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box" }}>
-			<CardContent sx={{ height: "700px", paddingTop: "30px" }}>
+		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box", boxShadow: 3 }}>
+			<CardContent sx={{ height: "80vh"}}>
 				{validatingKey ? <LoadMsg msg={"API key detected. Validating..."} /> : computeFormType(formType)}
 			</CardContent>
 		</Card>

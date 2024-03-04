@@ -37,33 +37,40 @@ const ApiKeyForm = ({ setFormType }) => {
 		setInputApiKey(e.target.value.replace(" ", ""));
 	};
 
+	const formTitle = {
+		fontFamily:"Josefin Sans Bold"
+
+	}
 	const getFormBody = () => {
 		if (isLoading) {
 			return <LoadMsg msg={"Validating API key..."} />;
 		} else {
 			return (
-				<form style={{ margin: "auto", boxSizing: "none" }} onSubmit={handleSubmit}>
-					<Grid container direction='col' spacing={5} justifyContent='center'>
+				<form style={{ margin: "auto", boxSizing: "none"}} onSubmit={handleSubmit}>
+					<Grid container direction='col' spacing={2} justifyContent='center'>
 						<Grid item>
 							<Grid container justifyContent='center'>
-								<Grid item>
-									<Typography variant='h3' align='center' className='formTitle'>
-										Step 1: Generate an API key
+								<Grid item sx = {{padding: "30px 10px 10px 30px"}}>
+									<Typography variant='h4' sx={formTitle}>
+										STEP 1: Generate an API key
 									</Typography>
-									<Typography align='center'>
-										Riot hasn't approved my API key application, so you'll have to generate one
-										yourself. Go to{" "}
+									<Typography>
+										We need an API key to use the Riot API for getting needed match information. Go to {" "}
 										<a href='https://developer.riotgames.com/' target='_blank'>
-											Riot's devsite
+											Riot's dev site
 										</a>
 										, log in, generate a key and copy paste it in this form:
 									</Typography>
 								</Grid>
-								<img src={require("../../images/dammit.gif")} style={{ maxHeight: "375px" }}></img>
-								<Typography align='center' sx={{ marginTop: "5px", fontSize: "0.8em" }}>
-									Note that these keys will only last 24h, so you'll need to generate a new key after
-									it expires (or if you clear your cukie!!)
-								</Typography>
+								<Grid item>
+									<img src={require("../../images/dammit.gif")} style={{ maxHeight: "350px", border: "1px" }}></img>
+								</Grid>
+								<Grid item>
+									<Typography align='center' sx={{  fontSize: "1em" }}>
+																			Note that these keys will only last 24h, so you'll need to generate a new key after
+																			it expires (or if you clear your cookie)
+									</Typography>
+								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item></Grid>
