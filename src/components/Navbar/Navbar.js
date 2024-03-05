@@ -2,17 +2,17 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { LOL_ORACLE } from "../../constants";
 const defaultBtnStyle = {color: "white", display: "block", margin: "20px", fontFamily: "Josefin Sans Regular"}
-const selectedBtnStyle = {color: "red", display: "block", margin: "200px", fontFamily:"Josefin Sans Bold"}
+const selectedBtnStyle = {color: "white", display: "block", margin: "20px", fontFamily:"Josefin Sans Bold", textDecoration: "underline"}
 
-const Navbar = ({ options, currentOption }) => {
+const Navbar = ({options}) => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+	const [currentOption, setCurrentOption] = React.useState(LOL_ORACLE)
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
 	};
@@ -20,8 +20,9 @@ const Navbar = ({ options, currentOption }) => {
 		setAnchorElUser(event.currentTarget);
 	};
 
-	const handleCloseNavMenu = () => {
+	const handleCloseNavMenu = (opt) => {
 		setAnchorElNav(null);
+		setCurrentOption(opt)
 	};
 
 	const handleCloseUserMenu = () => {
@@ -44,13 +45,13 @@ const Navbar = ({ options, currentOption }) => {
 						LoL Oracle
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-						{options.map((page) => (
+						 {options.map((option) => (
 							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								sx={currentOption == page ? selectedBtnStyle : defaultBtnStyle}
+								key={option}
+								onClick={() => handleCloseNavMenu(option)}
+								sx={currentOption === option ? selectedBtnStyle : defaultBtnStyle}
 							>
-								{page}
+								{option}
 							</Button>
 						))}
 					</Box>

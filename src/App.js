@@ -9,7 +9,7 @@ import apiKeyContext from "./common/ApiKeyContext";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Cookies from "js-cookie";
+import {LOL_ORACLE, ANALYTICS, GET_DATASET} from './constants'
 axios.defaults.baseURL = "http://localhost:8080";
 function App() {
 	const [apiKey, setApiKey] = useState("");
@@ -21,16 +21,15 @@ function App() {
 		display: "grid",
 		gridTemplateRows: "10vh 85vh"
 	}
-	const landing = {display: "grid"}
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline></CssBaseline>
 			<apiKeyContext.Provider value={apiKeyContextValue}>
 				<Box container direction="column" sx = {gridContainer}>
-					<Grid item xs={landing}>
-						<Navbar options={["LoL ORACLE", "ANALYTICS", "GET DATASET"]} current="LoL ORACLE"/>
+					<Grid item>
+						<Navbar options={[LOL_ORACLE, ANALYTICS, GET_DATASET]} current={LOL_ORACLE} />
 					</Grid>	
-					<Grid item xs = {landing}>
+					<Grid item>
 						<Landing />
 					</Grid>
 				</Box>

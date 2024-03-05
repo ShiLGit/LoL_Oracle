@@ -16,7 +16,7 @@ const LandingForm = () => {
 
 	//check cookies for a valid key on initial load of site
 	useEffect(() => {
-		console.log(Cookies.get(APIKEY));
+		console.log("Checking for API key: " + Cookies.get(APIKEY));
 		if (Cookies.get(APIKEY)) {
 			setValidatingKey(true);
 			RequestLogic.validateApiKey(Cookies.get(APIKEY), validateSuccess, validateFail);

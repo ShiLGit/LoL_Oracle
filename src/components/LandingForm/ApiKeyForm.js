@@ -47,7 +47,7 @@ const ApiKeyForm = ({ setFormType }) => {
 		} else {
 			return (
 				<form style={{ margin: "auto", boxSizing: "none"}} onSubmit={handleSubmit}>
-					<Grid container direction='col' spacing={2} justifyContent='center'>
+					<Grid container spacing={2} justifyContent='center'>
 						<Grid item>
 							<Grid container justifyContent='center'>
 								<Grid item sx = {{padding: "30px 10px 10px 30px"}}>
