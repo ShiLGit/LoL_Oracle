@@ -50,7 +50,7 @@ const LandingForm = () => {
 		}
 	};
 	return (
-		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box", boxShadow: 3 }}>
+		<Card sx={{ borderRadius: 0, margin: "15px", boxSizing: "border-box", boxShadow: "10px 10px 0px #8E8E8E" }}>
 			<CardContent sx={{ height: "80vh"}}>
 				{validatingKey ? <LoadMsg msg={"API key detected. Validating..."} /> : computeFormType(formType)}
 			</CardContent>
